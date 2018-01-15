@@ -4,7 +4,11 @@ import time;
 
 bl_info = {
     'name': 'Render all cameras',
-    'category': 'Object'
+    'category': 'Object',
+    'author': 'Niccolò Cantù (nicokant)',
+    'version': (0, 1),
+    'blender': (2, 9),
+    'description': 'automatically render all the cameras in the active scene',
 }
 
 class RenderAllCameras(bpy.types.Operator):

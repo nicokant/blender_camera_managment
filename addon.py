@@ -16,14 +16,14 @@ class RenderAllCameras(bpy.types.Operator):
         cameras_list = list(filter(lambda x: x.type == 'CAMERA', bpy.data.scenes[context.scene.name].objects))
 
         for camera in cameras_list:
-            self.render(context.scene, camera)
+            self.render(context, camera)
 
         return { 'FINISHED' }
 
-    def render(self, scene, camera):
-        scene.camera = camera
+    def render(self, context, camera):
+        context.scene.camera = camera
         ts = time.time()
-        bpy.data.scenes[0].render.filepath = '/home/nicokant/blender/render_' + str(ts)
+        bpy.data.scenes[context.scene.name].render.filepath = 'blender_camera/render_' + str(ts)
         bpy.ops.render.render(write_still=True)
 
 def register():

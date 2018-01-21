@@ -1,5 +1,6 @@
-import bpy;
-from . import helpers;
+import bpy
+from . import helpers
+
 
 class CameraPanel(bpy.types.Panel):
     bl_label = "Camera Panel"
@@ -12,15 +13,19 @@ class CameraPanel(bpy.types.Panel):
         layout = self.layout
 
         row = layout.row()
-        all = row.operator('render.button', text='render all cameras')
-        all.type = 'ALL'
+        # all = row.operator('render.button', text='render all cameras')
+        # all.type = 'ALL'
+        # row = layout.row()
 
         for camera in helpers.get_all_cameras(context):
             row = layout.row()
             split = row.split(0.4)
             col = split.column()
             sr = col.row()
-            icon = 'OUTLINER_OB_CAMERA' if camera == context.scene.camera else 'CAMERA_DATA'
+            if camera == context.scene.camera:
+                icon = 'OUTLINER_OB_CAMERA'
+            else:
+                icon = 'CAMERA_DATA'
             sr.label(text=camera.name, icon=icon)
 
             col = split.column()
